@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+
+    <!--
+JBoss, Home of Professional Open Source
+Copyright 2010-2011, Red Hat, Inc. and individual contributors
+by the @authors tag. See the copyright.txt in the distribution for a
+full listing of individual contributors.
+
+This is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2.1 of
+the License, or (at your option) any later version.
+
+This software is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this software; if not, write to the Free
+Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+02110-1301 USA, or see the FSF site: http://www.fsf.org.
+    -->
+
+    <ui:composition template="/templates/template.xhtml">
+
+        <ui:define name="body">
+
+            <h1><h:outputText value="#{msgs.applicationName}" /></h1>
+
+            <h:form id="playingArea">
+                <h:panelGrid columns="2" columnClasses="main-part, main-part">
+
+                    <h:panelGrid columns="3" columnClasses="first-column, second-column, third-column" rowClasses="first-row, second-row, third-row">
+
+                        <h:graphicImage id="image0" library="images" name="#{gameBean.images[0]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="0" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image1" library="images" name="#{gameBean.images[1]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="1" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image2" library="images" name="#{gameBean.images[2]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="2" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image3" library="images" name="#{gameBean.images[3]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="3" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image4" library="images" name="#{gameBean.images[4]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="4" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image5" library="images" name="#{gameBean.images[5]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="5" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image6" library="images" name="#{gameBean.images[6]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="6" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image7" library="images" name="#{gameBean.images[7]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="7" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                        <h:graphicImage id="image8" library="images" name="#{gameBean.images[8]}">
+                            <a4j:ajax event="click" render="#{gameBean.render}" action="#{gameBean.click}">
+                                <a4j:param assignTo="#{gameBean.imageNumber}" value="8" />
+                            </a4j:ajax>
+                        </h:graphicImage>
+
+                    </h:panelGrid>
+
+
+                    <h:panelGrid columns="1">
+                        <rich:tabPanel switchType="ajax" style="width: 300px;">
+                            <rich:tab id="settings" header="Settings">
+                                <h:form id="settingsForm">
+                                    <rich:dataTable value="#{gameBean.players}" var="player" rowKeyVar="playerNumber" stateVar="width: 100%">
+
+                                        <rich:column style="padding-left: 6px; padding-right: 6px;">
+                                            <h:outputText value="#{playerNumber == 0 ? 'X' : 'O'}" />
+                                        </rich:column>
+
+                                        <rich:column style="width: 100px;">
+                                            <f:facet name="header">Name</f:facet>
+                                            <rich:inplaceInput id="name" value="#{player.name}" required="true">
+                                                <a4j:ajax event="change" render="name" />
+                                            </rich:inplaceInput>
+                                        </rich:column>
+
+                                        <rich:column style="width: 100px;">
+                                            <f:facet name="header">Player Type</f:facet>
+                                            <h:selectOneMenu id="playerType#{playerNumber}" value="#{player.type}" style="width: 100%;">
+                                                <f:selectItems value="#{gameBean.playersItems}" />
+                                                <a4j:ajax action="#{gameBean.newGame}" render="playingArea" event="change" />
+                                            </h:selectOneMenu>
+                                        </rich:column>
+
+                                        <rich:column>
+                                            <f:facet name="header">First</f:facet>
+
+                                            <h:selectBooleanCheckbox id="playingFirst" value="#{player.first}">
+                                                <a4j:ajax event="change" render="settingsForm, playingArea" action="#{gameBean.selectFirstPlayer}">
+                                                    <a4j:param name="playerNumber" assignTo="#{gameBean.player}" value="#{playerNumber}" />
+                                                </a4j:ajax>
+                                            </h:selectBooleanCheckbox>
+
+                                        </rich:column>
+
+                                    </rich:dataTable>
+                                    <a4j:commandButton action="#{gameBean.newGame}" value="New Game" render="playingArea, statsForm"
+                                                       style="float: left, bottom; margin-top: 5px;" />
+                                </h:form>
+                            </rich:tab>
+
+                            <rich:tab id="stats" header="Statistics">
+                                <h:form id="statsForm">
+                                    <rich:dataTable value="#{gameBean.players}" var="player" style="width: 100%">
+
+                                        <rich:column>
+                                            #{player.name}
+                                            <f:facet name="footer">ties</f:facet>
+                                        </rich:column>
+
+                                        <rich:column style="text-align: center; width: 35px;" footerClass="center-text">
+                                            <f:facet name="header">Wins</f:facet>
+                                            #{player.wins}
+                                            <f:facet name="footer">#{gameBean.ties}</f:facet>
+                                        </rich:column>
+
+                                        <rich:column style="text-align: center; width: 35px;" footerClass="center-text">
+                                            <f:facet name="header">%</f:facet>
+                                            <h:outputText
+                                                value="#{gameBean.games == 0 ? 0 : (player.wins / gameBean.games * 100)}">
+                                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+                                            </h:outputText>
+                                            <f:facet name="footer">
+                                                <h:outputText
+                                                    value="#{gameBean.games == 0 ? 0 : (gameBean.ties / gameBean.games * 100)}">
+                                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+                                                </h:outputText>
+                                            </f:facet>
+                                        </rich:column>
+
+                                    </rich:dataTable>
+
+                                    <a4j:commandButton action="#{gameBean.newGame}" value="New Game" render="playingArea, statsForm"
+                                                       style="float: left, bottom; margin-top: 5px;" />
+                                    <a4j:commandButton action="#{gameBean.clearStats}" value="Clear Stats" render="statsForm"
+                                                       style="float: right; margin-top: 5px;" />
+                                </h:form>
+                            </rich:tab>
+                        </rich:tabPanel>
+
+                    </h:panelGrid>
+
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

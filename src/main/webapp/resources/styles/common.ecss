@@ -1,0 +1,62 @@
+.main-part {
+    vertical-align: top;
+    padding-right: 20px;
+}
+
+.table-header {
+    font: bolder; 
+    padding: 2px;
+    margin: 2px;
+    width: 110px;
+    border: 1px solid;
+}
+
+.center-text {
+    text-align: center;
+}
+
+#playingArea > table {
+    border-collapse: collapse;
+}
+
+.first-column {
+    border-right-width: 3px;
+    border-right-color: red;
+    border-right-style: solid;
+}
+
+.second-column {
+    border-right-width: 3px;
+    border-right-color: red;
+    border-right-style: solid;
+    border-left-width: 3px;
+    border-left-color: red;
+    border-left-style: solid;
+}
+
+.third-column {
+    border-left-width: 3px;
+    border-left-color: red;
+    border-left-style: solid;
+}
+
+.first-row > td {
+    border-bottom-width: 3px;
+    border-bottom-color: red;
+    border-bottom-style: solid;
+}
+
+.second-row > td {
+    border-bottom-width: 3px;
+    border-bottom-color: red;
+    border-bottom-style: solid;
+    border-top-width: 3px;
+    border-top-color: red;
+    border-top-style: solid;
+}
+
+.third-row > td {
+    border-top-width: 3px;
+    border-top-color: red;
+    border-top-style: solid;
+}
