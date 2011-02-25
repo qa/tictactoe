@@ -22,68 +22,12 @@
 package org.richfaces.examples.tictactoe;
 
 /**
- * Bean holding information about a player.
+ * Enum representing character with which a player plays.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */
-public class Player {
+public enum Character {
 
-    public static final int HUMAN_PLAYER = 0;
-    public static final int COMPUTER_PLAYER = 1;
-    private Character character;
-    private int type;
-    private String name;
-    private int wins;
-    private boolean first;
-
-    public Player() {
-    }
-
-    public Player(String name, int type, Character character, boolean first) {
-        this.name = name;
-        this.type = type;
-        this.character = character;
-        this.first = first;
-    }
-
-    public Character getCharacter() {
-        return character;
-    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getWins() {
-        return wins;
-    }
-
-    public void setWins(int wins) {
-        this.wins = wins;
-    }
-
-    public boolean isFirst() {
-        return first;
-    }
-
-    public void setFirst(boolean first) {
-        this.first = first;
-    }
+    X, O;
 }

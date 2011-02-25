@@ -60,3 +60,54 @@
     border-top-color: red;
     border-top-style: solid;
 }
+
+div.playingArea table {
+    background: none;
+    border: 0;
+}
+
+div.playingArea tr:nth-child(1) td:nth-child(1) {
+    border-right: solid red 3px;
+    border-bottom: solid red 3px;
+}
+
+div.playingArea tr:nth-child(1) td:nth-child(2) {
+    border-right: solid red 3px;
+    border-bottom: solid red 3px;
+}
+
+div.playingArea tr:nth-child(1) td:nth-child(3) {
+    border-right: 0;
+    border-bottom: solid red 3px;
+}
+
+div.playingArea tr:nth-child(2) td:nth-child(1) {
+    border-right: solid red 3px;
+    border-bottom: solid red 3px;
+}
+
+div.playingArea tr:nth-child(2) td:nth-child(2) {
+    border-right: solid red 3px;
+    border-bottom: solid red 3px;
+}
+
+div.playingArea tr:nth-child(2) td:nth-child(3) {
+    border-right: 0;
+    border-bottom: solid red 3px;
+}
+
+div.playingArea tr:nth-child(3) td:nth-child(1) {
+    border-right: solid red 3px;
+    border-bottom: 0;
+}
+
+div.playingArea tr:nth-child(3) td:nth-child(2) {
+    border-right: solid red 3px;
+    border-bottom: 0;
+}
+
+div.playingArea tr:nth-child(3) td:nth-child(3) {
+    border-right: 0;
+    border-bottom: 0;
+}
+ 

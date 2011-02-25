@@ -22,12 +22,10 @@
 package org.richfaces.examples.tictactoe;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 import javax.faces.model.SelectItem;
 
 /**
@@ -40,15 +38,12 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class GameBean implements Serializable {
 
-    // components on the page that need to be rerendered
-    private Set<String> render;
     // number of image on which the user clicked
     private int imageNumber;
     // number of player who clicked (0 or 1)
     private int player = 0;
     private Player[] players;
-    // URLs of images that should be rendered
-    private String[] images;
+    private FieldState[] fieldStates;
     // number of player that won - 9 for no winner
     private int gameFinished = 9;
     // how many clicks were performed
@@ -62,33 +57,24 @@ public class GameBean implements Serializable {
     };
 
     public GameBean() {
-        images = new String[9];
+        fieldStates = new FieldState[9];
         random = new Random(9);
         players = new Player[2];
 
-        players[0] = new Player("Player 1", Player.HUMAN_PLAYER, 'x', true);
-        players[1] = new Player("Player 2", Player.COMPUTER_PLAYER, 'o', false);
+        players[0] = new Player("Player 1", Player.HUMAN_PLAYER, Character.X, true);
+        players[1] = new Player("Player 2", Player.COMPUTER_PLAYER, Character.O, false);
 
         for (int i = 0; i < 9; i++) {
-            images[i] = "clear.png";
+            fieldStates[i] = FieldState.CLEAR;
         }
-        render = new HashSet<String>();
     }
 
-    public String[] getImages() {
-        return images;
+    public FieldState[] getFieldStates() {
+        return fieldStates;
     }
 
-    public void setImages(String[] images) {
-        this.images = images;
-    }
-
-    public Set<String> getRender() {
-        return render;
-    }
-
-    public void setRender(Set<String> reRender) {
-        this.render = reRender;
+    public void setFieldStates(FieldState[] fieldStates) {
+        this.fieldStates = fieldStates;
     }
 
     public int getImageNumber() {
@@ -137,18 +123,13 @@ public class GameBean implements Serializable {
 
     public String click() {
         System.out.println("clicked on image " + imageNumber);
-        if (players[player].getType() == Player.HUMAN_PLAYER) {
-            render.clear();
-        }
-
         if (gameFinished == 0 || gameFinished == 1 || clicks == 9) {
             return null;
         }
 
         // if player click into clear field, perform click, otherwise ignore click
-        if ("clear.png".equals(images[imageNumber])) {
-            images[imageNumber] = players[player].getCharacter() + ".png";
-            render.add("image" + imageNumber);
+        if (FieldState.CLEAR.equals(fieldStates[imageNumber])) {
+            fieldStates[imageNumber] = FieldState.getNormalState(players[player].getCharacter());
 
             checkLine(imageNumber / 3);
             checkColumn(imageNumber % 3);
@@ -160,7 +141,6 @@ public class GameBean implements Serializable {
             if (clicks == 9 && gameFinished != 0 && gameFinished != 1) {
                 games++;
                 ties++;
-                render.add("statsForm");
                 return null;
             }
             changePlayer();
@@ -169,7 +149,7 @@ public class GameBean implements Serializable {
         if (gameFinished != 0 && gameFinished != 1 && players[player].getType() == Player.COMPUTER_PLAYER && clicks != 9) {
             do {
                 imageNumber = random.nextInt(9);
-            } while (!images[imageNumber].equals("clear.png"));
+            } while (!fieldStates[imageNumber].equals(FieldState.CLEAR));
             click();
         }
 
@@ -177,9 +157,8 @@ public class GameBean implements Serializable {
     }
 
     public String newGame() {
-        render.clear();
         for (int i = 0; i < 9; i++) {
-            images[i] = "clear.png";
+            fieldStates[i] = FieldState.CLEAR;
         }
         gameFinished = 9;
         player = (players[0].isFirst() ? 0 : 1);
@@ -216,12 +195,10 @@ public class GameBean implements Serializable {
      *            the number of line (0 to 2)
      */
     private void checkLine(int index) {
-        if (images[3 * index + 0].equals(images[3 * index + 1]) && images[3 * index + 1].equals(images[3 * index + 2])) {
+        if (fieldStates[3 * index].equals(fieldStates[3 * index + 1]) && fieldStates[3 * index + 1].equals(fieldStates[3 * index + 2])) {
             for (int i = 0; i < 3; i++) {
-                images[3 * index + i] = players[player].getCharacter() + "-win.png";
-                render.add("image" + (3 * index + i));
+                fieldStates[3 * index + i] = FieldState.getWinningState(players[player].getCharacter());
             }
-            render.add("statsForm");
             finishGame();
         }
     }
@@ -233,12 +210,10 @@ public class GameBean implements Serializable {
      *            the number of column (0 to 2)
      */
     private void checkColumn(int index) {
-        if (images[index + 0].equals(images[index + 3]) && images[index + 3].equals(images[index + 6])) {
+        if (fieldStates[index + 0].equals(fieldStates[index + 3]) && fieldStates[index + 3].equals(fieldStates[index + 6])) {
             for (int i = 0; i < 7; i += 3) {
-                images[index + i] = players[player].getCharacter() + "-win.png";
-                render.add("image" + (index + i));
+                fieldStates[index + i] = FieldState.getWinningState(players[player].getCharacter());
             }
-            render.add("statsForm");
             finishGame();
         }
     }
@@ -247,27 +222,19 @@ public class GameBean implements Serializable {
      * Checks whether diagonals win.
      */
     private void checkDiagonals() {
-        char tmp = players[player].getCharacter();
+        Character charr = players[player].getCharacter();
 
-        if (images[0].equals(images[4]) && images[4].equals(images[8]) && !images[0].equals("resources/images/clear.png")) {
-            images[0] = "resources/images/" + tmp + "-win.png";
-            render.add("image0");
-            images[4] = "resources/images/" + tmp + "-win.png";
-            render.add("image4");
-            images[8] = "resources/images/" + tmp + "-win.png";
-            render.add("image8");
-            render.add("statsForm");
+        if (fieldStates[0].equals(fieldStates[4]) && fieldStates[4].equals(fieldStates[8]) && !fieldStates[0].equals(FieldState.CLEAR)) {
+            fieldStates[0] = FieldState.getWinningState(charr);
+            fieldStates[4] = FieldState.getWinningState(charr);
+            fieldStates[8] = FieldState.getWinningState(charr);
             finishGame();
         }
 
-        if (images[2].equals(images[4]) && images[4].equals(images[6]) && !images[2].equals("images/clear.png")) {
-            images[2] = "resources/images/" + tmp + "-win.png";
-            render.add("image2");
-            images[4] = "resources/images/" + tmp + "-win.png";
-            render.add("image4");
-            images[6] = "resources/images/" + tmp + "-win.png";
-            render.add("image6");
-            render.add("statsForm");
+        if (fieldStates[2].equals(fieldStates[4]) && fieldStates[4].equals(fieldStates[6]) && !fieldStates[2].equals(FieldState.CLEAR)) {
+            fieldStates[2] = FieldState.getWinningState(charr);
+            fieldStates[4] = FieldState.getWinningState(charr);
+            fieldStates[6] = FieldState.getWinningState(charr);
             finishGame();
         }
     }
