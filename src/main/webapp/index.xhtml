@@ -34,13 +34,13 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
             <h:form id="form">
                 <h:panelGrid columns="2" columnClasses="main-part, main-part">
 
-                    <a4j:outputPanel layout="block" styleClass="playingArea">
-                        <rich:dataGrid id="playingArea" value="#{gameBean.fieldStates}" var ="field" columns="10" iterationStatusVar="status" styleClass="playingArea">
-                            <a4j:commandButton id="field" image="/resources/images/#{fn:toLowerCase(field)}.png" action="#{gameBean.click}" render="playingArea output">
-                                <a4j:param assignTo="#{gameBean.imageNumber}" name="imageNo" value="#{status.index}"/>
-                            </a4j:commandButton>
-                        </rich:dataGrid>
-                    </a4j:outputPanel>
+                    <rich:dataGrid id="playingArea" value="#{gameBean.fieldStates}" var ="field" columns="3"
+                                   iterationStatusVar="status" styleClass="playingArea">
+                        <a4j:commandButton id="field" image="/resources/images/#{fn:toLowerCase(field)}.png"
+                                           action="#{gameBean.click}" render="playingArea output">
+                            <a4j:param assignTo="#{gameBean.imageNumber}" name="imageNo" value="#{status.index}"/>
+                        </a4j:commandButton>
+                    </rich:dataGrid>
 
                     <rich:tabPanel switchType="ajax" style="width: 300px;">
                         <rich:tab id="settings" header="Settings">
