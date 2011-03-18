@@ -26,6 +26,7 @@ import java.util.Random;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 
 /**
@@ -171,11 +172,16 @@ public class GameBean implements Serializable {
         return null;
     }
 
-    public String selectFirstPlayer() {
-        players[0].setFirst(player == 0 ? true : false);
-        players[1].setFirst(player == 1 ? true : false);
+    public void newGameListener(AjaxBehaviorEvent event) {
+        newGame();
+    }
 
-        return newGame();
+    public void selectFirstPlayer(AjaxBehaviorEvent event) {
+        players[0].setFirst(!players[0].isFirst());
+        players[1].setFirst(!players[1].isFirst());
+        player = players[0].isFirst() ? 0 : 1;
+
+        newGame();
     }
 
     public String clearStats() {

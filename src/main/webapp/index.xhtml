@@ -47,34 +47,36 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 
                             <rich:dataTable value="#{gameBean.players}" var="player" rowKeyVar="playerNumber" stateVar="width: 100%">
 
-                                <rich:column style="padding-left: 6px; padding-right: 6px;">
+                                <rich:column id="playerNoColumn" style="padding-left: 6px; padding-right: 6px;">
                                     <h:outputText value="#{playerNumber == 0 ? 'X' : 'O'}" />
                                 </rich:column>
 
-                                <rich:column style="width: 100px;">
+                                <rich:column id="nameColumn" style="width: 100px;">
                                     <f:facet name="header">Name</f:facet>
                                     <rich:inplaceInput id="name" value="#{player.name}" required="true">
                                         <a4j:ajax event="change" render="name" />
                                     </rich:inplaceInput>
                                 </rich:column>
 
-                                <rich:column style="width: 100px;">
+                                <rich:column id="typeColumn" style="width: 100px;">
                                     <f:facet name="header">Player Type</f:facet>
                                     <h:selectOneMenu id="playerType#{playerNumber}" value="#{player.type}" style="width: 100%;">
                                         <f:selectItems value="#{gameBean.playersItems}" />
-                                        <a4j:ajax action="#{gameBean.newGame}" render="playingArea" event="change" />
+                                        <a4j:ajax render="playingArea" event="change" listener="#{gameBean.newGameListener}"/>
                                     </h:selectOneMenu>
                                 </rich:column>
 
-                                <rich:column>
-                                    <f:facet name="header">First</f:facet>
+                                <rich:column id="firstColumn" style="width: 70px;">
+                                    <f:facet name="header">
+                                        First
+                                        <h:graphicImage id="swap" library="images" name="swap.png" height="24" width="24" style="vertical-align: middle;">
+                                            <a4j:ajax event="click" render="settings playingArea" listener="#{gameBean.selectFirstPlayer}"/>
+                                        </h:graphicImage>
+                                    </f:facet>
 
-                                    <h:selectBooleanCheckbox id="playingFirst" value="#{player.first}">
-                                        <a4j:ajax render="settings playingArea" action="#{gameBean.selectFirstPlayer}">
-                                            <a4j:param name="playerNumber" assignTo="#{gameBean.player}" value="#{playerNumber}" />
-                                        </a4j:ajax>
-                                    </h:selectBooleanCheckbox>
-
+                                    <h:selectOneRadio id="playingFirst" value="#{player.first}" disabled="true" style="margin-left: auto; margin-right: auto;">
+                                        <f:selectItem itemValue="true"/>
+                                    </h:selectOneRadio>
                                 </rich:column>
 
                             </rich:dataTable>
