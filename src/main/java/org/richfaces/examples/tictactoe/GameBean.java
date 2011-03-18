@@ -122,7 +122,6 @@ public class GameBean implements Serializable {
     }
 
     public String click() {
-        System.out.println("clicked on image " + imageNumber);
         if (gameFinished == 0 || gameFinished == 1 || clicks == 9) {
             return null;
         }
