@@ -57,7 +57,7 @@
 
     <issueManagement>
         <system>jira</system>
-        <url>https://jira.jboss.org/jira/browse/RF</url>
+        <url>https://issues.jboss.org/jira/browse/RF</url>
     </issueManagement>
 
     <developers>
