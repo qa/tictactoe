@@ -23,7 +23,7 @@ package org.richfaces.examples.tictactoe;
 
 /**
  * Enum representing state of one playing field.
- * 
+ *
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */

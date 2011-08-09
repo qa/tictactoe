@@ -31,7 +31,7 @@ import javax.faces.model.SelectItem;
 
 /**
  * The main managed bean. It stores the playing area, information about players and game logic.
- * 
+ *
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */
@@ -195,7 +195,7 @@ public class GameBean implements Serializable {
 
     /**
      * Checks whether the selected line wins.
-     * 
+     *
      * @param index
      *            the number of line (0 to 2)
      */
@@ -210,7 +210,7 @@ public class GameBean implements Serializable {
 
     /**
      * Checks whether the selected column wins.
-     * 
+     *
      * @param index
      *            the number of column (0 to 2)
      */

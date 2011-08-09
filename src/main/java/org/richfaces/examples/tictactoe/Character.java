@@ -23,7 +23,7 @@ package org.richfaces.examples.tictactoe;
 
 /**
  * Enum representing character with which a player plays.
- * 
+ *
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */

@@ -23,7 +23,7 @@ package org.richfaces.examples.tictactoe;
 
 /**
  * Bean holding information about a player.
- * 
+ *
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */
