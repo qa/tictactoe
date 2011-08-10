@@ -37,7 +37,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
                     <rich:dataGrid id="playingArea" value="#{gameBean.fieldStates}" var ="field" columns="3"
                                    iterationStatusVar="status" styleClass="playingArea">
                         <a4j:commandButton id="field" image="/resources/images/#{fn:toLowerCase(field)}.png"
-                                           action="#{gameBean.click}" render="playingArea output">
+                                           action="#{gameBean.click}" render="playingArea stats">
                             <a4j:param assignTo="#{gameBean.imageNumber}" name="imageNo" value="#{status.index}"/>
                         </a4j:commandButton>
                     </rich:dataGrid>
@@ -115,9 +115,9 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 
                             </rich:dataTable>
 
-                            <a4j:commandButton action="#{gameBean.newGame}" value="New Game" render="playingArea, statsForm"
+                            <a4j:commandButton action="#{gameBean.newGame}" value="New Game" render="playingArea stats"
                                                style="float: left, bottom; margin-top: 5px;" />
-                            <a4j:commandButton action="#{gameBean.clearStats}" value="Clear Stats" render="statsForm"
+                            <a4j:commandButton action="#{gameBean.clearStats}" value="Clear Stats" render="stats"
                                                style="float: right; margin-top: 5px;" />
                         </rich:tab>
                     </rich:tabPanel>
