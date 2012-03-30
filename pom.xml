@@ -19,7 +19,7 @@
     <groupId>org.richfaces.examples</groupId>
     <artifactId>tictactoe</artifactId>
     <name>Tic-Tac-Toe Game</name>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>4.2.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <description>A sample RichFaces 4 application.</description>
     <url>http://jboss.org/richfaces</url>
@@ -67,7 +67,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <version.richfaces>4.1.0-SNAPSHOT</version.richfaces>
+        <version.richfaces>4.2.1-SNAPSHOT</version.richfaces>
     </properties>
 
     <dependencyManagement>
