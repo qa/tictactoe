@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 <!--
-        JBoss, Home of Professional Open Source Copyright 2010-2011, Red Hat, Inc. and individual contributors by the
+        JBoss, Home of Professional Open Source Copyright 2010-2013, Red Hat, Inc. and individual contributors by the
         @authors tag. See the copyright.txt in the distribution for a full listing of individual contributors. This is
         free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License
         as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later
@@ -19,7 +19,7 @@
     <groupId>org.richfaces.examples</groupId>
     <artifactId>tictactoe</artifactId>
     <name>Tic-Tac-Toe Game</name>
-    <version>4.3.2-SNAPSHOT</version>
+    <version>5.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <description>A sample RichFaces 4 application.</description>
     <url>http://jboss.org/richfaces</url>
@@ -45,7 +45,7 @@
     <developers>
         <developer>
             <name>Pavol Pitonak</name>
-            <email>ppitonak@redhat.com</email>
+            <email>ppitonak @ redhat.com</email>
             <timezone>+1</timezone>
         </developer>
     </developers>
@@ -71,43 +71,25 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <version.richfaces>4.3.1.Final</version.richfaces>
+        
+        <version.richfaces>5.0.0-SNAPSHOT</version.richfaces>
+        <version.jboss.javaee.6.spec>3.0.2.Final</version.jboss.javaee.6.spec>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.richfaces</groupId>
-                <artifactId>richfaces-bom</artifactId>
-                <version>${version.richfaces}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- Dependencies for RichFaces -->
         <dependency>
-            <groupId>org.richfaces.core</groupId>
-            <artifactId>richfaces-core-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.richfaces.ui</groupId>
-            <artifactId>richfaces-components-ui</artifactId>
+            <groupId>org.richfaces</groupId>
+            <artifactId>richfaces</artifactId>
+            <version>${version.richfaces}</version>
         </dependency>
         
-        <!-- Dependencies for bean validation -->
+        <!-- Dependencies for JEE APIs -->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
-        <!-- Dependencies for JavaServer Faces -->
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <version>${version.jboss.javaee.6.spec}</version>
+            <type>pom</type>
             <scope>provided</scope>
         </dependency>
         
@@ -128,12 +110,11 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
@@ -144,34 +125,10 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
-                        <manifestEntries>
-                            <SCM-Revision>${buildNumber}</SCM-Revision>
-                            <SCM-Timestamp>${timestamp}</SCM-Timestamp>
-                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <doCheck>false</doCheck>
-                    <doUpdate>false</doUpdate>
-                    <revisionOnScmFailure>unknown</revisionOnScmFailure>
-                    <timestampFormat>{0,date,MMM dd, yyyy H:mm:ss zzz}</timestampFormat>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.2</version>
                 <executions>

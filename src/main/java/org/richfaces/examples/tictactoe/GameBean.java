@@ -1,6 +1,6 @@
 /*******************************************************************************
  * JBoss, Home of Professional Open Source
- * Copyright 2010-2011, Red Hat, Inc. and individual contributors
+ * Copyright 2010-2013, Red Hat, Inc. and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -32,13 +32,13 @@ import javax.faces.model.SelectItem;
 /**
  * The main managed bean. It stores the playing area, information about players and game logic.
  *
- * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
+ * @author <a href="https://community.jboss.org/people/ppitonak">Pavol Pitonak</a>
  */
 @ManagedBean
 @SessionScoped
 public class GameBean implements Serializable {
 
+    private static final long serialVersionUID = 4250174819706242032L;
     // number of image on which the user clicked
     private int imageNumber;
     // number of player who clicked (0 or 1)
